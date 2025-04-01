@@ -12,11 +12,11 @@ export default function Main(){
   const [ newRepo, setNewRepo ] = useState(''); 
   const [ repositorios, setRepositorios ] = useState([]);
   
-  const handleSubmit = useCallBack((e)=>{
+  const handleSubmit = useCallback((e)=>{
     e.preventDefault();
 
     async function submit() {
-      const response = api.get(`repos/${newRepo}`);
+      const response = await api.get(`repos/${newRepo}`);
 
       const data = {
         name: response.data.full_name,
