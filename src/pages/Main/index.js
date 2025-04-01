@@ -25,7 +25,7 @@ export default function Main(){
           name: response.data.full_name,
         }
 
-        setRepositorios([...repositorios, data]);
+        setRepositorios([...repositorios, data]); ///...repositorios -> pega todos os repositorios que já existem e adiciona o novo repositorio, que é o data
         setNewRepo('');     
       } catch (error) {
         console.log(error);
