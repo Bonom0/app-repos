@@ -7,6 +7,7 @@ import {
   BackButton,
   IssuesList,
   PageActions,
+  StatusButton,
 } from "./styles";
 import { FaArrowLeft } from "react-icons/fa";
 import api from "../../services/api";
@@ -18,6 +19,7 @@ export default function Repositorio({ match }) {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [state, setState] = useState("open");
 
   useEffect(() => {
     async function load() {
@@ -47,7 +49,7 @@ export default function Repositorio({ match }) {
 
       const response = await api.get(`/repos/${nomeRepo}/issues`, {
         params: {
-          state: "open",
+          state: state,
           page,
           per_page: 5,
         },
@@ -57,10 +59,14 @@ export default function Repositorio({ match }) {
     }
 
     loadIssue();
-  }, [repositorio, page]);
+  }, [repositorio, page, state]);
 
   function handlePage(action) {
     setPage(action === "back" ? page - 1 : page + 1);
+  }
+
+  function handleStatus(state) {
+    setState(state);
   }
 
   if (loading) {
@@ -76,6 +82,7 @@ export default function Repositorio({ match }) {
       <BackButton to="/">
         <FaArrowLeft color="#000" size={30} />
       </BackButton>
+
       <Owner>
         <img
           src={repositorioSelecionado.owner.avatar_url}
@@ -86,6 +93,20 @@ export default function Repositorio({ match }) {
       </Owner>
 
       <IssuesList>
+        <StatusButton>
+          <button type="button" onClick={() => handleStatus("open")}>
+            Abertos
+          </button>
+
+          <button type="button" onClick={() => handleStatus("closed")}>
+            Fechados
+          </button>
+
+          <button type="button" onClick={() => handleStatus("all")}>
+            Todos
+          </button>
+        </StatusButton>
+
         {issues.map((issue) => (
           <li key={String(issue.id)}>
             <img src={issue.user.avatar_url} alt={issue.user.login} />
