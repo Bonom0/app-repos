@@ -1,16 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { FaGithub, FaPlus, FaSpinner, FaBars, FaTrash } from 'react-icons/fa';
-import { 
-  Container,
-  Form,
-  SubmitButton,
-  List,
-  DeleteButton
-} from './styles';
+import { Container, Form, SubmitButton, List, DeleteButton } from './styles';
 
 import api from "../../services/api";
 
 export default function Main(){
+  
   const [ newRepo, setNewRepo ] = useState(''); 
   const [ repositorios, setRepositorios ] = useState([]);
   const [ loading, setLoading ] = useState(false);
