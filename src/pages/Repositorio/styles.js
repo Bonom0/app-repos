@@ -143,3 +143,24 @@ export const PageActions = styled.div`
     }
   }
 `;
+
+export const StatusButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  button {
+    outline: 0;
+    border: 0;
+    background: #222;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transform: 0.3s;
+
+    &:hover {
+      background: #a9a9a9;
+    }
+  }
+`;
